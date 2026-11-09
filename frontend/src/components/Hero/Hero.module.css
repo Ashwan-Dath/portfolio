@@ -1,0 +1,65 @@
+/* components/Hero/Hero.module.css */
+
+.hero {
+  padding-block: clamp(36px, 6vw, 80px) clamp(48px, 7vw, 88px);
+}
+
+/* Copy left, guestbook right; one column below 900px. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+.copy {
+  display: grid;
+  gap: 28px;
+  align-content: start;
+}
+
+.intro {
+  display: grid;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+/* The only eyebrow on the page: name and role in small mono capitals. */
+.eyebrow {
+  font-family: var(--font-mono-stack);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Four words, so it can be big: wide capitals at up to ~74px, two lines on desktop. */
+.title {
+  font-size: clamp(2.6rem, 6.2vw, 4.6rem);
+  font-weight: 780;
+  font-stretch: 118%;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+
+.lede {
+  max-width: 44ch;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* minmax(0, 1fr), not plain 1fr: a plain 1fr column can't shrink below its widest content,
+   so one long word could force the whole page to scroll sideways on a phone. */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Familjen+Grotesk:wght@400..700&family=Hanken+Grotesk:wght@400..800&family=IBM+Plex+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Martian+Mono:wdth,wght@75..112.5,400..600&display=swap">
+<style>
+/* Layout: a neutral review shell with three tabs; each tab renders the same portfolio page in its own skin
+   (Blueprint = technical drawing, Radiograph = film X-ray, Signal = browser DevTools). */
+:root {
+  /* review shell */
+  --c-bg: #EEF0F3; --c-fg: #14171C; --c-muted: #565D69; --c-line: #D5D9E0; --c-panel: #FFFFFF;
+  /* Blueprint */
+  --a-bg: #F4F7FB; --a-fg: #0F2A47; --a-muted: #466079; --a-line: #C6D3E3; --a-accent: #1E4ED0; --a-on-accent: #F6F9FE; --a-surface: #FFFFFF;
+  --a-print: #17398E; --a-print-fg: #EEF3FF; --a-print-muted: #B9C9F2; --a-print-line: rgba(226, 235, 255, .26);
+  /* Radiograph */
+  --b-bg: #ECEEF0; --b-fg: #1A1D21; --b-muted: #5B636B; --b-line: #CFD5DA; --b-accent: #0E6A70; --b-on-accent: #F3F7F7; --b-surface: #F8F9FA;
+  --b-film: #0A1118; --b-film-2: #142130; --b-film-fg: #D6E3EE; --b-film-muted: #93A9BC; --b-film-line: rgba(196, 220, 238, .45);
+  /* Signal */
+  --s-bg: #F2F3EE; --s-fg: #171A16; --s-muted: #575F55; --s-line: #D1D6CB; --s-accent: #B0500A; --s-on-accent: #FFF8F1; --s-surface: #FAFBF7;
+  --s-content: rgba(64, 118, 206, .13); --s-pad: rgba(72, 146, 82, .22); --s-tip: #22261F; --s-tip-fg: #F2F3EE;
+
+  --font-shell: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --c-bg: #0F1115; --c-fg: #E7E9ED; --c-muted: #9AA1AC; --c-line: #262A31; --c-panel: #161920;
+    --a-bg: #0C1526; --a-fg: #E2EAF6; --a-muted: #93A5BF; --a-line: #22324B; --a-accent: #7FA3FF; --a-on-accent: #0C1526; --a-surface: #111C30;
+    --a-print: #0F2A6E; --a-print-fg: #EAF0FF; --a-print-muted: #A9BCEB; --a-print-line: rgba(226, 235, 255, .2);
+    --b-bg: #121518; --b-fg: #E5E8EB; --b-muted: #9AA2AA; --b-line: #2A3036; --b-accent: #5CC1C7; --b-on-accent: #0C1114; --b-surface: #171B1F;
+    --b-film: #05090D; --b-film-2: #0D1823; --b-film-fg: #D2E0EC; --b-film-muted: #8EA4B7; --b-film-line: rgba(196, 220, 238, .38);
+    --s-bg: #131512; --s-fg: #E6E8E2; --s-muted: #9DA597; --s-line: #2B3029; --s-accent: #F0A23A; --s-on-accent: #161813; --s-surface: #181B17;
+    --s-content: rgba(98, 150, 236, .16); --s-pad: rgba(98, 180, 110, .22); --s-tip: #E6E8E2; --s-tip-fg: #131512;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --c-bg: #0F1115; --c-fg: #E7E9ED; --c-muted: #9AA1AC; --c-line: #262A31; --c-panel: #161920;
+  --a-bg: #0C1526; --a-fg: #E2EAF6; --a-muted: #93A5BF; --a-line: #22324B; --a-accent: #7FA3FF; --a-on-accent: #0C1526; --a-surface: #111C30;
+  --a-print: #0F2A6E; --a-print-fg: #EAF0FF; --a-print-muted: #A9BCEB; --a-print-line: rgba(226, 235, 255, .2);
+  --b-bg: #121518; --b-fg: #E5E8EB; --b-muted: #9AA2AA; --b-line: #2A3036; --b-accent: #5CC1C7; --b-on-accent: #0C1114; --b-surface: #171B1F;
+  --b-film: #05090D; --b-film-2: #0D1823; --b-film-fg: #D2E0EC; --b-film-muted: #8EA4B7; --b-film-line: rgba(196, 220, 238, .38);
+  --s-bg: #131512; --s-fg: #E6E8E2; --s-muted: #9DA597; --s-line: #2B3029; --s-accent: #F0A23A; --s-on-accent: #161813; --s-surface: #181B17;
+  --s-content: rgba(98, 150, 236, .16); --s-pad: rgba(98, 180, 110, .22); --s-tip: #E6E8E2; --s-tip-fg: #131512;
+}
+
+/* ---------- review shell ---------- */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--c-bg); color: var(--c-fg); font-family: var(--font-shell); font-size: 15px; line-height: 1.5; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 28px 56px; display: grid; gap: 18px; }
+.shell-head { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+.shell-title { margin: 0; font-size: 1.35rem; font-weight: 650; letter-spacing: -0.01em; text-wrap: balance; }
+.shell-sub { margin: 4px 0 0; color: var(--c-muted); max-width: 62ch; }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--c-panel); border: 1px solid var(--c-line); border-radius: 10px; }
+.tab { font: inherit; font-weight: 600; border: 0; background: transparent; color: var(--c-muted); padding: 8px 14px; border-radius: 7px; cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--c-fg); color: var(--c-bg); }
+.tab:focus-visible { outline: 2px solid var(--c-fg); outline-offset: 2px; }
+.dir-note { margin: 0; color: var(--c-muted); max-width: 80ch; }
+.shell-foot { color: var(--c-muted); font-size: 13px; }
+@media (max-width: 760px) { .shell-head { grid-template-columns: 1fr; } .tabs { justify-self: start; } }
+
+/* ---------- direction skins: map shared tokens ---------- */
+.dir { border-radius: 14px; overflow: hidden; border: 1px solid var(--c-line); transition: background-color .35s ease, color .35s ease; }
+.dir-a { --bg: var(--a-bg); --fg: var(--a-fg); --muted: var(--a-muted); --line: var(--a-line); --accent: var(--a-accent); --on-accent: var(--a-on-accent); --surface: var(--a-surface);
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif; --body: "Archivo", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace; --r: 2px; }
+.dir-b { --bg: var(--b-bg); --fg: var(--b-fg); --muted: var(--b-muted); --line: var(--b-line); --accent: var(--b-accent); --on-accent: var(--b-on-accent); --surface: var(--b-surface);
+  --display: "Hanken Grotesk", system-ui, sans-serif; --body: "Hanken Grotesk", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --r: 14px; }
+.dir-s { --bg: var(--s-bg); --fg: var(--s-fg); --muted: var(--s-muted); --line: var(--s-line); --accent: var(--s-accent); --on-accent: var(--s-on-accent); --surface: var(--s-surface);
+  --display: "Familjen Grotesk", system-ui, sans-serif; --body: "Familjen Grotesk", system-ui, sans-serif; --mono: "Martian Mono", ui-monospace, monospace; --r: 6px; }
+.dir { background: var(--bg); color: var(--fg); font-family: var(--body); }
+
+/* ---------- shared page anatomy ---------- */
+.site { display: grid; gap: clamp(36px, 6vw, 72px); padding: clamp(18px, 3.4vw, 36px); }
+.site-head { display: flex; align-items: center; gap: 20px; min-height: 56px; }
+.logo { font-family: var(--display); font-weight: 700; color: var(--fg); text-decoration: none; font-size: 1.05rem; }
+.site-nav { display: flex; gap: 18px; margin-left: auto; }
+.site-nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+.site-nav a:hover { color: var(--fg); }
+.xray-btn { font: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); cursor: pointer; }
+.xray-btn .state { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.xray-btn[aria-pressed="true"] .state { color: var(--accent); }
+kbd { font-family: var(--mono); font-size: 11px; padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; color: var(--muted); background: var(--bg); }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.hero-copy { display: grid; gap: 18px; align-content: start; padding-top: 8px; }
+.hero h1 { margin: 0; font-family: var(--display); text-wrap: balance; line-height: 1.02; }
+.lede { margin: 0; color: var(--muted); font-size: 1.08rem; max-width: 46ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { font: inherit; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 18px; border-radius: var(--r); cursor: pointer; text-decoration: none; white-space: nowrap; border: 1px solid transparent; transition: transform .12s ease, background-color .2s ease; }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn:disabled { opacity: .72; cursor: progress; }
+.btn:focus-visible, .xray-btn:focus-visible, .site-nav a:focus-visible, .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.demo { display: grid; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: clamp(16px, 2.4vw, 24px); }
+.demo-title { margin: 0; font-family: var(--display); font-size: 1.05rem; font-weight: 650; }
+.note-form { display: grid; gap: 12px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-weight: 600; font-size: 13px; }
+.field input, .field textarea { font: inherit; width: 100%; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 1; }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.hint { margin: 0; font-family: var(--mono); font-size: 11px; color: var(--muted); justify-self: end; }
+.form-error { margin: 0; color: var(--accent); font-weight: 600; font-size: 14px; }
+.form-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+.journey-wrap { display: grid; gap: 10px; }
+.journey { list-style: none; margin: 0; padding: 0; }
+.stage-name { font-weight: 650; }
+.stage-host { color: var(--muted); font-size: 12.5px; }
+.stage-ms { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); }
+.stage.is-done .stage-ms { color: var(--fg); }
+.badge { font-family: var(--mono); font-size: 10.5px; padding: 2px 6px; border-radius: 999px; background: var(--accent); color: var(--on-accent); white-space: nowrap; }
+.journey-summary { margin: 0; font-size: 14px; color: var(--muted); }
+.journey-summary strong { color: var(--fg); font-variant-numeric: tabular-nums; }
+
+.notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.notes-label { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
+.note { display: grid; gap: 2px; }
+.note-msg { margin: 0; overflow-wrap: anywhere; }
+.note-meta { margin: 0; font-size: 12.5px; color: var(--muted); }
+.note.pending .note-msg { color: var(--muted); }
+.note.pending .note-meta { font-style: italic; }
+
+.work { display: grid; gap: 18px; }
+.work-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: 16px; align-items: end; }
+.work h2 { margin: 0; font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.05; }
+.search-status { margin: -6px 0 0; font-size: 13px; color: var(--muted); min-height: 1.2em; }
+.projects { list-style: none; margin: 0; padding: 0; }
+.project h3 { margin: 0; font-family: var(--display); font-size: 1.12rem; }
+.project p { margin: 0; color: var(--muted); max-width: 60ch; }
+.year { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-family: var(--mono); font-size: 11px; padding: 3px 8px; border: 1px solid var(--line); border-radius: var(--r); color: var(--fg); }
+.project.empty { color: var(--muted); }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .work-head { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) { .site-nav { display: none; } .xray-btn { margin-left: auto; } }
+
+/* ---------- Blueprint ---------- */
+.dir-a .site { border: 1px solid var(--line); margin: 10px; border-radius: 0; }
+.dir-a .hero h1 { font-stretch: 118%; font-weight: 780; text-transform: uppercase; letter-spacing: -0.005em; font-size: clamp(1.9rem, 4.1vw, 3.4rem); }
+.dir-a .logo { font-stretch: 125%; text-transform: uppercase; letter-spacing: .02em; font-size: .95rem; }
+.dir-a .work h2 { font-stretch: 118%; text-transform: uppercase; }
+.dir-a .demo-title, .dir-a .stage-name { font-family: var(--mono); font-size: 11.5px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+.dir-a .journey { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+.dir-a .journey::before { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 1px; background: var(--line); }
+.dir-a .stage { display: grid; gap: 4px; position: relative; padding-right: 6px; }
+.dir-a .dot { width: 13px; height: 13px; border: 1.5px solid var(--fg); background: var(--bg); position: relative; transition: background-color .2s ease, transform .2s ease; }
+.dir-a .stage.is-active .dot { background: var(--accent); border-color: var(--accent); transform: rotate(45deg); }
+.dir-a .stage.is-done .dot { background: var(--fg); }
+.dir-a .stage-name { margin-top: 6px; }
+.dir-a .stage .badge { justify-self: start; }
+.dir-a .bar { display: none; }
+.dir-a .projects { display: grid; }
+.dir-a .project { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto; gap: 18px; padding-block: 16px; border-top: 1px solid var(--line); align-items: start; }
+.dir-a .project-main { display: grid; gap: 6px; }
+@media (max-width: 640px) {
+  .dir-a .journey { grid-template-columns: 1fr; gap: 12px; }
+  .dir-a .journey::before { left: 6px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; }
+  .dir-a .stage { grid-template-columns: 13px minmax(0, 1fr) auto; column-gap: 12px; align-items: center; }
+  .dir-a .stage-name { margin-top: 0; }
+  .dir-a .stage-host { grid-column: 2; }
+  .dir-a .stage-ms { grid-column: 3; grid-row: 1; }
+  .dir-a .project { grid-template-columns: 1fr; gap: 10px; }
+}
+
+/* ---------- Radiograph ---------- */
+.dir-b .hero { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
+.dir-b .hero-copy { order: 2; padding-top: 28px; }
+.dir-b .demo { order: 1; }
+.dir-b .hero h1 { font-weight: 640; letter-spacing: -0.035em; font-size: clamp(2.1rem, 4.6vw, 3.9rem); line-height: 1.0; }
+.dir-b .journey { display: grid; }
+.dir-b .stage { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; column-gap: 12px; align-items: center; padding-block: 7px; position: relative; }
+.dir-b .stage::before { content: ""; position: absolute; left: 7.5px; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.dir-b .stage:first-child::before { top: 50%; }
+.dir-b .stage:last-child::before { bottom: 50%; }
+.dir-b .dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--muted); background: var(--surface); position: relative; z-index: 1; transition: background-color .25s ease, border-color .25s ease, transform .25s ease; }
+.dir-b .stage.is-active .dot { border-color: var(--accent); transform: scale(1.18); }
+.dir-b .stage.is-done .dot { background: var(--accent); border-color: var(--accent); }
+.dir-b .stage-text { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; min-width: 0; }
+.dir-b .bar { display: none; }
+.dir-b .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.dir-b .project { display: grid; gap: 10px; align-content: start; padding: 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); }
+.dir-b .project:first-child { grid-column: 1 / -1; }
+.dir-b .project-main { display: grid; gap: 6px; }
+.dir-b .chips li { border-radius: 999px; }
+@media (max-width: 860px) { .dir-b .hero-copy { order: 0; padding-top: 0; } }
+@media (max-width: 640px) { .dir-b .projects { grid-template-columns: 1fr; } }
+
+/* ---------- Signal ---------- */
+.dir-s .hero { grid-template-columns: 1fr; gap: 28px; }
+.dir-s .hero-copy { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: end; column-gap: 40px; }
+.dir-s .hero h1 { grid-column: 1; grid-row: 1 / span 2; font-weight: 700; letter-spacing: -0.03em; font-size: clamp(2.2rem, 5vw, 4.3rem); line-height: .98; }
+.dir-s .lede { grid-column: 2; }
+.dir-s .ctas { grid-column: 2; }
+.dir-s .demo { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); column-gap: 32px; align-items: start; }
+.dir-s .demo-title { grid-column: 1 / -1; }
+.dir-s .note-form { grid-column: 1; }
+.dir-s .journey-wrap { grid-column: 2; grid-row: 2 / span 2; }
+.dir-s .notes-block { grid-column: 1; }
+.dir-s .journey { display: grid; gap: 4px; }
+.dir-s .journey-head, .dir-s .stage { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) 4.4rem; column-gap: 12px; align-items: center; }
+.dir-s .journey-head { font-family: var(--mono); font-size: 10.5px; color: var(--muted); padding-bottom: 6px; border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+.dir-s .journey-head span:last-child, .dir-s .stage-ms { text-align: right; }
+.dir-s .stage { min-height: 34px; }
+.dir-s .dot { display: none; }
+.dir-s .stage-text { display: grid; line-height: 1.2; min-width: 0; }
+.dir-s .stage-name { font-size: 13.5px; }
+.dir-s .stage-host { font-size: 11.5px; }
+.dir-s .track { position: relative; height: 12px; }
+.dir-s .bar { position: absolute; top: 0; height: 12px; left: calc(var(--start, 0) * 1%); width: max(3px, calc(var(--dur, 0) * 1%)); background: var(--fg); opacity: .8; border-radius: 2px; transform: scaleX(0); transform-origin: left center; transition: transform var(--t, .3s) linear; }
+.dir-s .stage.is-active .bar, .dir-s .stage.is-done .bar { transform: scaleX(1); }
+.dir-s .stage.is-active .bar { background: var(--accent); opacity: 1; }
+.dir-s .stage-ms { font-size: 12.5px; }
+.dir-s .stage .badge { grid-column: 2; justify-self: start; margin-top: 2px; }
+.dir-s .projects { display: grid; gap: 0; }
+.dir-s .project { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) minmax(0, .9fr); gap: 18px; padding-block: 14px; border-top: 1px solid var(--line); align-items: start; }
+.dir-s .project .year { grid-column: 1; grid-row: 1; padding-top: 3px; }
+.dir-s .project-main { display: grid; gap: 4px; }
+@media (max-width: 860px) {
+  .dir-s .hero-copy { grid-template-columns: 1fr; }
+  .dir-s .hero h1, .dir-s .lede, .dir-s .ctas { grid-column: 1; grid-row: auto; }
+  .dir-s .demo { grid-template-columns: 1fr; }
+  .dir-s .note-form, .dir-s .journey-wrap, .dir-s .notes-block { grid-column: 1; grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .dir-s .journey-head, .dir-s .stage { grid-template-columns: 6.6rem minmax(0, 1fr) 3.6rem; column-gap: 8px; }
+  .dir-s .project { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ---------- X-ray mode ---------- */
+[data-xray] { position: relative; }
+html.xray-on .dir [data-xray]::after {
+  content: attr(data-xray); position: absolute; left: 10px; top: 0; transform: translateY(-50%);
+  max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 500; line-height: 1.6; letter-spacing: .02em;
+  padding: 0 7px; pointer-events: none; z-index: 2;
+}
+/* Blueprint: the sheet becomes a blueprint print */
+html.xray-on .dir-a { --bg: var(--a-print); --fg: var(--a-print-fg); --muted: var(--a-print-muted); --line: var(--a-print-line); --surface: transparent; --accent: var(--a-print-fg); --on-accent: var(--a-print);
+  background-image: linear-gradient(var(--a-print-line) 1px, transparent 1px), linear-gradient(90deg, var(--a-print-line) 1px, transparent 1px);
+  background-size: 28px 28px; }
+html.xray-on .dir-a [data-xray] { outline: 1px dashed var(--a-print-fg); outline-offset: 6px; }
+html.xray-on .dir-a [data-xray]::after { top: -6px; text-transform: uppercase; letter-spacing: .06em; background: var(--a-print); color: var(--a-print-fg); border: 1px solid var(--a-print-fg); }
+html.xray-on .dir-a .field input, html.xray-on .dir-a .field textarea { background: transparent; }
+/* Radiograph: the page develops like film, only structure shows */
+html.xray-on .dir-b { --bg: var(--b-film); --fg: var(--b-film-fg); --muted: var(--b-film-muted); --line: var(--b-film-line); --surface: transparent; --accent: var(--b-film-fg); --on-accent: var(--b-film);
+  background-image: radial-gradient(120% 80% at 30% 20%, var(--b-film-2), var(--b-film) 70%); }
+html.xray-on .dir-b [data-xray] { outline: 1px solid var(--b-film-line); outline-offset: 8px; border-radius: var(--r); }
+html.xray-on .dir-b [data-xray]::after { top: -8px; color: var(--b-film-fg); background: var(--b-film); letter-spacing: .04em; }
+html.xray-on .dir-b .btn.primary { background: transparent; color: var(--b-film-fg); border-color: var(--b-film-fg); }
+html.xray-on .dir-b .field input, html.xray-on .dir-b .field textarea { background: transparent; }
+/* Signal: elements highlight the way the browser inspector shows them */
+html.xray-on .dir-s [data-xray] { background-color: var(--s-content); box-shadow: inset 0 0 0 8px var(--s-pad); outline: 1px solid var(--s-accent); outline-offset: 0; }
+html.xray-on .dir-s [data-xray]::after { content: attr(data-xray) "   " attr(data-dim); top: -2px; transform: translateY(-100%); left: 0; background: var(--s-tip); color: var(--s-tip-fg); border-radius: 3px; padding: 2px 7px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="shell-head">
+    <div>
+      <h1 class="shell-title">Three directions for your portfolio</h1>
+      <p class="shell-sub">The same page in three looks. In each one, switch on X-ray (the button or the X key), send a test note, and search the work.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Visual direction">
+      <button class="tab" role="tab" id="tab-blueprint" aria-controls="blueprint" data-dir="blueprint">Blueprint</button>
+      <button class="tab" role="tab" id="tab-radiograph" aria-controls="radiograph" data-dir="radiograph">Radiograph</button>
+      <button class="tab" role="tab" id="tab-signal" aria-controls="signal" data-dir="signal">Signal</button>
+    </div>
+  </header>
+  <p class="dir-note" id="dir-note" aria-live="polite"></p>
+
+  <main>
+    <section class="dir dir-a" id="blueprint" role="tabpanel" aria-labelledby="tab-blueprint" hidden></section>
+    <section class="dir dir-b" id="radiograph" role="tabpanel" aria-labelledby="tab-radiograph" hidden></section>
+    <section class="dir dir-s" id="signal" role="tabpanel" aria-labelledby="tab-signal" hidden></section>
+  </main>
+
+  <p class="shell-foot">Everything in this preview is sample data: the notes, the projects and the timings. On the real site the timings come from your backend.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var DIRS = {
+    blueprint: "Blueprint: a technical drawing. Wide capitals, ultramarine ink, sharp corners. X-ray turns the sheet into a blueprint with every part labelled.",
+    radiograph: "Radiograph: soft and calm by default. X-ray develops the page like film, so only its structure shows through.",
+    signal: "Signal: an engineer's toolkit. The note's journey is a DevTools-style waterfall, and X-ray highlights parts the way the browser inspector does, with their sizes."
+  };
+  var ORDER = ["blueprint", "radiograph", "signal"];
+
+  var STAGES = [
+    { id: "browser", name: "Browser", host: "React on your device", min: 40, max: 130 },
+    { id: "nextjs", name: "Next.js", host: "Route handler on Vercel", min: 14, max: 40 },
+    { id: "network", name: "Network", host: "Vercel to Cloud Run", min: 60, max: 170 },
+    { id: "express", name: "Express", host: "API on Cloud Run", min: 8, max: 28 },
+    { id: "postgres", name: "PostgreSQL", host: "Database on Neon", min: 3, max: 14 }
+  ];
+
+  var SAMPLE_NOTES = [
+    { name: "Meera", message: "The request trace made the stack click for me. Nice work.", when: "2 days ago" },
+    { name: "Daniel", message: "Searching for postgres found the right project instantly.", when: "5 days ago" }
+  ];
+
+  var PROJECTS = [
+    { title: "This portfolio", year: "2026", summary: "Next.js front end and an Express API on Cloud Run, with PostgreSQL full-text search and a live request trace.", tech: ["Next.js", "React", "Express", "PostgreSQL", "Cloud Run"] },
+    { title: "Sample project: booking dashboard", year: "2025", summary: "Placeholder. Replace this with a real project from your work.", tech: ["React", "Node.js", "MySQL"] },
+    { title: "Sample project: payments API", year: "2024", summary: "Placeholder. Replace this with a real project from your work.", tech: ["Java", "Spring Boot", "AWS"] }
+  ];
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function stageHtml(s, i) {
+    return '<li class="stage" data-stage="' + s.id + '" style="--i:' + i + '">' +
+      '<span class="dot" aria-hidden="true"></span>' +
+      '<span class="stage-text"><span class="stage-name">' + s.name + '</span><span class="stage-host">' + s.host + '</span></span>' +
+      '<span class="track" aria-hidden="true"><span class="bar"></span></span>' +
+      '<span class="stage-ms" data-ms>waiting</span>' +
+      (s.id === "express" ? '<span class="badge" data-badge hidden>Woke from zero</span>' : "") +
+      "</li>";
+  }
+
+  function noteHtml(n, pending) {
+    return '<li class="note' + (pending ? " pending" : "") + '"><p class="note-msg">' + esc(n.message) + '</p><p class="note-meta">' + esc(n.name) + ", " + esc(n.when) + "</p></li>";
+  }
+
+  function projectHtml(p) {
+    return '<li class="project"><span class="year">' + p.year + '</span><div class="project-main"><h3>' + esc(p.title) + "</h3><p>" + esc(p.summary) + '</p></div><ul class="chips">' +
+      p.tech.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></li>";
+  }
+
+  function render(p) {
+    return '<div class="site">' +
+      '<header class="site-head">' +
+        '<a class="logo" href="#' + p + '" data-xray="Root layout, Server Component">Your Name</a>' +
+        '<nav class="site-nav" aria-label="Site"><a href="#' + p + '-work">Work</a><a href="#' + p + '-notes">Notes</a></nav>' +
+        '<button class="xray-btn" type="button" data-action="xray" aria-pressed="false" aria-keyshortcuts="x" data-xray="useContext + useEffect, saved in localStorage">X-ray <span class="state">off</span> <kbd>X</kbd></button>' +
+      "</header>" +
+      '<div class="hero">' +
+        '<div class="hero-copy" data-xray="Server-rendered HTML, CSS Modules">' +
+          "<h1>Don't take my word for it. Watch the stack run.</h1>" +
+          '<p class="lede">This site is a working full-stack app. Switch on X-ray to see the code behind every part.</p>' +
+          '<div class="ctas"><button class="btn primary" type="button" data-action="xray">Switch on X-ray</button><a class="btn ghost" href="#' + p + '-notes">Leave a note</a></div>' +
+        "</div>" +
+        '<div class="demo" id="' + p + '-notes" data-xray="Client component: useActionState + useOptimistic">' +
+          '<h2 class="demo-title">Leave a note and follow it through the stack</h2>' +
+          '<form class="note-form" novalidate>' +
+            '<div class="field"><label for="' + p + '-name">Name</label><input id="' + p + '-name" name="name" maxlength="40" autocomplete="name" placeholder="How should we credit you?"></div>' +
+            '<div class="field"><label for="' + p + '-msg">Message</label><textarea id="' + p + '-msg" name="message" maxlength="280" rows="2" placeholder="Say hello, or tell me what caught your eye"></textarea><p class="hint"><span data-count>0</span> / 280</p></div>' +
+            '<p class="form-error" role="alert" hidden></p>' +
+            '<div class="form-row"><button class="btn primary" type="submit">Send note</button></div>' +
+          "</form>" +
+          '<div class="journey-wrap" data-xray="useReducer state machine, real timings">' +
+            '<div class="journey-head" aria-hidden="true"><span>Layer</span><span>Time</span><span>ms</span></div>' +
+            '<ol class="journey" aria-label="Request journey">' + STAGES.map(stageHtml).join("") + "</ol>" +
+            '<p class="journey-summary" aria-live="polite">Send a note to trace its path through all five layers.</p>' +
+          "</div>" +
+          '<div class="notes-block" data-xray="PostgreSQL, newest notes cached 60 s">' +
+            '<p class="notes-label">Latest notes (sample)</p>' +
+            '<ul class="notes">' + SAMPLE_NOTES.map(function (n) { return noteHtml(n, false); }).join("") + "</ul>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+      '<section class="work" id="' + p + '-work" aria-labelledby="' + p + '-work-h">' +
+        '<div class="work-head"><h2 id="' + p + '-work-h">Work</h2>' +
+          '<div class="field" data-xray="Debounced search, stale requests cancelled"><label for="' + p + '-q">Search projects</label><input id="' + p + '-q" type="search" placeholder="Try react or postgres" autocomplete="off"></div>' +
+        "</div>" +
+        '<p class="search-status" aria-live="polite"></p>' +
+        '<ul class="projects" data-xray="PostgreSQL full-text search, GIN index">' + PROJECTS.map(projectHtml).join("") + "</ul>" +
+      "</section>" +
+    "</div>";
+  }
+
+  // ---------- state ----------
+  var current = "blueprint";
+  var xray = false;
+  try { xray = localStorage.getItem("directions-xray") === "1"; } catch (e) { /* storage blocked: start with X-ray off */ }
+
+  ORDER.forEach(function (key) {
+    var panel = document.getElementById(key);
+    panel.innerHTML = render(key);
+    wirePanel(panel, key);
+  });
+
+  function setXray(on) {
+    xray = on;
+    document.documentElement.classList.toggle("xray-on", on);
+    document.querySelectorAll('[data-action="xray"].xray-btn').forEach(function (b) {
+      b.setAttribute("aria-pressed", String(on));
+      b.querySelector(".state").textContent = on ? "on" : "off";
+    });
+    document.querySelectorAll('.btn[data-action="xray"]').forEach(function (b) {
+      b.textContent = on ? "Switch off X-ray" : "Switch on X-ray";
+    });
+    try { localStorage.setItem("directions-xray", on ? "1" : "0"); } catch (e) { /* ignore */ }
+    measure();
+  }
+
+  // Signal's inspector labels show each part's size, like the browser's own tooltip.
+  function measure() {
+    if (!xray || current !== "signal") return;
+    document.querySelectorAll("#signal [data-xray]").forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      el.setAttribute("data-dim", Math.round(r.width) + " × " + Math.round(r.height));
+    });
+  }
+  var measureTimer;
+  window.addEventListener("resize", function () { clearTimeout(measureTimer); measureTimer = setTimeout(measure, 120); });
+
+  function selectDir(key, focusTab) {
+    if (!DIRS[key]) return;
+    current = key;
+    ORDER.forEach(function (k) {
+      var tab = document.getElementById("tab-" + k);
+      var on = k === key;
+      tab.setAttribute("aria-selected", String(on));
+      tab.tabIndex = on ? 0 : -1;
+      document.getElementById(k).hidden = !on;
+      if (on && focusTab) tab.focus();
+    });
+    document.getElementById("dir-note").textContent = DIRS[key];
+    try { history.replaceState(null, "", "#" + key); } catch (e) { /* ignore */ }
+    measure();
+  }
+
+  document.querySelectorAll(".tab").forEach(function (tab) {
+    tab.addEventListener("click", function () { selectDir(tab.getAttribute("data-dir"), false); });
+    tab.addEventListener("keydown", function (e) {
+      var i = ORDER.indexOf(current);
+      if (e.key === "ArrowRight") { e.preventDefault(); selectDir(ORDER[(i + 1) % 3], true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); selectDir(ORDER[(i + 2) % 3], true); }
+    });
+  });
+
+  // X toggles X-ray, except while typing or with a modifier key held.
+  function shouldToggle(e) {
+    if (e.key !== "x" && e.key !== "X") return false;
+    if (e.ctrlKey || e.metaKey || e.altKey) return false;
+    var t = e.target;
+    if (!t || !t.closest) return true;
+    return !t.closest("input, textarea, select, [contenteditable=''], [contenteditable='true']");
+  }
+  document.addEventListener("keydown", function (e) {
+    if (shouldToggle(e)) { e.preventDefault(); setXray(!xray); }
+  });
+
+  function wirePanel(panel, key) {
+    panel.querySelectorAll('[data-action="xray"]').forEach(function (b) {
+      b.addEventListener("click", function () { setXray(!xray); });
+    });
+
+    // ----- guestbook + journey -----
+    var form = panel.querySelector(".note-form");
+    var nameEl = form.querySelector('[name="name"]');
+    var msgEl = form.querySelector('[name="message"]');
+    var countEl = form.querySelector("[data-count]");
+    var errEl = form.querySelector(".form-error");
+    var sendBtn = form.querySelector('button[type="submit"]');
+    var list = panel.querySelector(".notes");
+    var stagesEls = panel.querySelectorAll(".stage");
+    var summary = panel.querySelector(".journey-summary");
+    var badge = panel.querySelector("[data-badge]");
+    var timers = [];
+
+    msgEl.addEventListener("input", function () { countEl.textContent = String(msgEl.value.length); });
+
+    function resetJourney() {
+      timers.forEach(clearTimeout); timers = [];
+      stagesEls.forEach(function (li) {
+        li.classList.remove("is-active", "is-done");
+        li.querySelector("[data-ms]").textContent = "waiting";
+        li.style.removeProperty("--start"); li.style.removeProperty("--dur"); li.style.removeProperty("--t");
+      });
+      if (badge) badge.hidden = true;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = nameEl.value.trim();
+      var message = msgEl.value.trim();
+      errEl.hidden = true;
+      if (!name) { errEl.textContent = "Add your name so people know who wrote the note."; errEl.hidden = false; nameEl.focus(); return; }
+      if (!message) { errEl.textContent = "Write a short message first."; errEl.hidden = false; msgEl.focus(); return; }
+
+      resetJourney();
+      sendBtn.disabled = true;
+      sendBtn.textContent = "Sending";
+      list.insertAdjacentHTML("afterbegin", noteHtml({ name: name, message: message, when: "sending" }, true));
+      var pendingLi = list.firstElementChild;
+      summary.textContent = "Tracing your note through the stack.";
+
+      // Simulated timings. On the real site these come from the Server-Timing data each layer reports.
+      var coldStart = Math.random() < 0.25;
+      var ms = STAGES.map(function (s) {
+        var v = s.min + Math.random() * (s.max - s.min);
+        if (coldStart && s.id === "express") v += 850 + Math.random() * 300;
+        return Math.round(v);
+      });
+      var total = ms.reduce(function (a, b) { return a + b; }, 0);
+      var start = 0;
+      stagesEls.forEach(function (li, i) {
+        li.style.setProperty("--start", String((start / total) * 100));
+        li.style.setProperty("--dur", String((ms[i] / total) * 100));
+        start += ms[i];
+      });
+
+      var t = 0;
+      stagesEls.forEach(function (li, i) {
+        var play = reduceMotion ? 0 : Math.min(1100, Math.max(260, ms[i] * 2.2));
+        li.style.setProperty("--t", (play / 1000) + "s");
+        timers.push(setTimeout(function () { li.classList.add("is-active"); }, t));
+        timers.push(setTimeout(function () {
+          li.classList.remove("is-active");
+          li.classList.add("is-done");
+          li.querySelector("[data-ms]").textContent = ms[i] + " ms";
+          if (STAGES[i].id === "express" && badge && coldStart) badge.hidden = false;
+        }, t + play));
+        t += play;
+      });
+
+      timers.push(setTimeout(function () {
+        summary.innerHTML = "Your note passed through 5 layers in <strong>" + total + " ms</strong>" + (coldStart ? ", including a cold start on Cloud Run" : "") + ". Simulated for this preview.";
+        pendingLi.classList.remove("pending");
+        pendingLi.querySelector(".note-meta").textContent = name + ", just now";
+        while (list.children.length > 5) list.removeChild(list.lastElementChild);
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Send note";
+        form.reset();
+        countEl.textContent = "0";
+        measure();
+      }, t + 80));
+    });
+
+    // ----- search -----
+    var q = panel.querySelector('input[type="search"]');
+    var status = panel.querySelector(".search-status");
+    var ul = panel.querySelector(".projects");
+    var debounce;
+    q.addEventListener("input", function () {
+      clearTimeout(debounce);
+      debounce = setTimeout(function () {
+        var tokens = q.value.toLowerCase().match(/[\p{L}\p{N}]+/gu) || [];
+        var hits = PROJECTS.filter(function (p) {
+          var words = (p.title + " " + p.summary + " " + p.tech.join(" ")).toLowerCase().match(/[\p{L}\p{N}]+/gu) || [];
+          return tokens.every(function (tk) { return words.some(function (w) { return w.indexOf(tk) === 0; }); });
+        });
+        if (!tokens.length) { ul.innerHTML = PROJECTS.map(projectHtml).join(""); status.textContent = ""; }
+        else if (!hits.length) { ul.innerHTML = '<li class="project empty">No projects match “' + esc(q.value.trim()) + '”.</li>'; status.textContent = "0 results."; }
+        else { ul.innerHTML = hits.map(projectHtml).join(""); status.textContent = hits.length + (hits.length === 1 ? " result" : " results") + ", filtered in your browser for this preview."; }
+        measure();
+      }, 220);
+    });
+  }
+
+  var fromHash = (location.hash || "").replace("#", "");
+  selectDir(DIRS[fromHash] ? fromHash : "blueprint", false);
+  setXray(xray);
+})();
+</script>
+
+</body>
+</html>

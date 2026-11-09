@@ -1,0 +1,22 @@
+/* app/status-page.module.css
+   Shared look for the error and not-found pages. */
+
+.page {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+  padding-block: clamp(64px, 10vw, 128px);
+}
+
+.title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 780;
+  font-stretch: 118%;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.text {
+  max-width: 52ch;
+  color: var(--muted);
+}

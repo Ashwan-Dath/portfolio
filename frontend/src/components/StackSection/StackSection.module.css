@@ -1,0 +1,77 @@
+/* components/StackSection/StackSection.module.css
+   Three groups side by side, like the legend boxes on a drawing; one column on phones. */
+
+.stack {
+  display: grid;
+  gap: 28px;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.group {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding-top: 14px;
+  border-top: 2px solid var(--fg);
+}
+
+.groupTitle {
+  font-family: var(--font-mono-stack);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.skills {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill {
+  display: grid;
+  gap: 3px;
+  justify-items: start;
+}
+
+.skillName {
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.proof {
+  color: var(--muted);
+  font-size: 14.5px;
+  max-width: 42ch;
+}
+
+.tag {
+  margin-top: 4px;
+  padding: 1px 7px;
+  font-family: var(--font-mono-stack);
+  font-size: 10.5px;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.also {
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

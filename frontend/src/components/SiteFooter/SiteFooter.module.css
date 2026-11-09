@@ -1,0 +1,59 @@
+/* components/SiteFooter/SiteFooter.module.css */
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding-block: 40px 48px;
+}
+
+/* Contact on the left, links on the right, credits on their own row. Stacks on small screens. */
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px 32px;
+  align-items: start;
+}
+
+.contact {
+  display: grid;
+  gap: 4px;
+}
+
+.name {
+  font-weight: 760;
+  font-stretch: 118%;
+  text-transform: uppercase;
+}
+
+.email {
+  font-family: var(--font-mono-stack);
+  font-size: 14px;
+  color: var(--muted);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a {
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.meta {
+  grid-column: 1 / -1;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,114 @@
+/* components/Guestbook/Guestbook.module.css */
+
+/* The card is the one raised surface in the hero, so it gets a border and the sheet colour. */
+.card {
+  display: grid;
+  gap: 22px;
+  padding: clamp(16px, 2.4vw, 28px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.head {
+  display: grid;
+  gap: 8px;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 760;
+  font-stretch: 112%;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.notice {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.count {
+  justify-self: end;
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.error {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--error);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Wrapper of the timing chart. The scroll margin keeps it clear of the sticky header when scrolled to. */
+.journeyAnchor {
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.notesBlock {
+  display: grid;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.notesTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.notes {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note {
+  display: grid;
+  gap: 2px;
+}
+
+/* Long words or links can't push the card wider than the screen. */
+.message {
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  font-size: 12.5px;
+  color: var(--muted);
+  /* A 40-character name with no spaces must wrap instead of widening the card past a phone screen. */
+  overflow-wrap: anywhere;
+}
+
+/* The optimistic note: same layout, quieter text, italic "sending". Contrast stays readable. */
+.pending .message {
+  color: var(--muted);
+}
+
+.pending .meta {
+  font-style: italic;
+}

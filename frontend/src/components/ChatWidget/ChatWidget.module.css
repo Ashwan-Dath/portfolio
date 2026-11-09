@@ -1,0 +1,326 @@
+/* components/ChatWidget/ChatWidget.module.css
+   Fixed to the bottom-right corner. Same drawing look as the page: ruled boxes, sharp corners, mono labels. */
+
+/* Stack of panel, greeting bubble and launcher, aligned to the right edge. z-index sits above the
+   sticky header (10) so the open panel is never covered. */
+.widget {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 20;
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  pointer-events: none; /* the empty area around the buttons must not block clicks on the page */
+}
+
+.widget > * {
+  pointer-events: auto;
+}
+
+/* Carries the bubble and robot together; JS sets transform and transition-duration for each walk. */
+.roamer {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+  transition-property: transform;
+  transition-timing-function: linear;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roamer {
+    transition: none;
+  }
+}
+
+/* The robot button: no box of its own, just the robot with a small label underneath. */
+.launcher {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 4px 6px 6px;
+  font: inherit;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* Before the robot walks in, the whole button stays invisible (and unclickable). */
+.launcher[data-phase='offstage'] {
+  visibility: hidden;
+}
+
+.launcher:active {
+  transform: translateY(1px);
+}
+
+.launcherLabel {
+  padding: 2px 8px;
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  /* Same orange as the robot, with navy text (about 4.9:1 contrast). */
+  color: #23305a;
+  background: #ff6b2c;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+html[data-xray='on'] .launcherLabel {
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+/* The robot's speech bubble, with a small tail pointing down at the robot. */
+.bubble {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: min(280px, calc(100vw - 32px));
+  margin-right: 28px;
+  background: var(--surface);
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(15, 42, 71, 0.14);
+  animation: rise-in 0.35s var(--ease-out) both;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  right: 22px;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-right: 1px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+  transform: rotate(45deg);
+}
+
+/* Each new line pops in, so the eye catches that the robot is "talking". */
+.bubbleText {
+  animation: pop-in 0.3s var(--ease-out) both;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html[data-xray='on'] .bubble,
+html[data-xray='on'] .panel {
+  background: var(--bg);
+}
+
+.bubbleText {
+  padding: 12px 4px 12px 14px;
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  color: var(--fg);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.bubbleDismiss,
+.close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.bubbleDismiss:hover,
+.close:hover {
+  color: var(--fg);
+}
+
+/* The open chat. Height is capped so it never covers the whole screen on a laptop. */
+.panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  width: min(380px, calc(100vw - 32px));
+  /* Leaves room for the robot underneath (about 130px) and the sticky header above. */
+  height: min(520px, calc(100dvh - 220px));
+  background: var(--surface);
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(15, 42, 71, 0.22);
+  animation: rise-in 0.28s var(--ease-out) both;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+  padding: 14px 14px 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 760;
+  font-stretch: 112%;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.log {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 14px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* scrolling the chat doesn't scroll the page behind it */
+}
+
+.bot,
+.visitor {
+  max-width: 88%;
+  padding: 9px 12px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  border-radius: var(--radius);
+  overflow-wrap: anywhere;
+}
+
+.bot {
+  justify-self: start;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.visitor {
+  justify-self: end;
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.typing {
+  font-family: var(--font-mono-stack);
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.chip {
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--fg);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  padding: 12px 16px 16px;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Guide line: robot fingertip to the Send note button ----------
+   Covers the screen without catching clicks; sits just under the robot (z-index 19 vs 20). */
+.guideLine {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 19;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Orange dashes that march towards the button, like a laser pointer. */
+.guidePath {
+  stroke: #ff6b2c;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 8 7;
+  animation: march 0.6s linear infinite;
+}
+
+.guideArrow {
+  fill: #ff6b2c;
+}
+
+/* A small glowing dot at the fingertip. */
+.guideSpark {
+  fill: #ffd23f;
+  stroke: #ff6b2c;
+  stroke-width: 2;
+  animation: spark 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes march {
+  to {
+    stroke-dashoffset: -15;
+  }
+}
+
+@keyframes spark {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guidePath,
+  .guideSpark {
+    animation: none;
+  }
+}

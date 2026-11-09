@@ -1,0 +1,112 @@
+/* xray/XrayPanel.module.css
+   The X-ray card, drawn like the title block in the corner of an engineering drawing:
+   a ruled box, small mono captions on the left, values on the right. */
+
+.panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  animation: panel-in 0.28s var(--ease-out) both;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-mono-stack);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.summary {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--fg);
+}
+
+.rows {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Each row: caption column + value column, like the cells of a title block. */
+.row {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 12px;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.row dt {
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 2px;
+}
+
+.row dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.chips,
+.code,
+.files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  font-family: var(--font-mono-stack);
+  font-size: 11.5px;
+  padding: 1px 7px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.code code {
+  font-family: var(--font-mono-stack);
+  font-size: 13px;
+}
+
+.files a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.demo {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}

@@ -1,0 +1,9 @@
+# .gitattributes
+# Store every text file with LF line endings, so Windows and Mac/Linux machines produce identical diffs.
+* text=auto eol=lf
+
+# Binary files must never be converted.
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

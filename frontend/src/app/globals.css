@@ -1,0 +1,352 @@
+/* app/globals.css
+   Site-wide styles: design tokens (colours, fonts, spacing), a small reset, shared building blocks
+   (container, buttons, form fields) and X-ray mode. Component-specific styles live in each
+   component's *.module.css file (CSS Modules), which scopes class names so they never clash.
+
+   Visual direction "Blueprint": a technical drawing. Ultramarine ink on cool drafting paper, wide
+   capital headings, sharp corners. X-ray mode turns the page into a blueprint print: white line work
+   on blueprint blue, with every part outlined and labelled. */
+
+/* ---------- Design tokens ---------- */
+:root {
+  color-scheme: light;
+
+  /* Raw palette (light). Components never use these directly; they use the semantic tokens below. */
+  --paper: #f4f7fb; /* cool drafting paper, not cream */
+  --ink: #0f2a47; /* navy ink for text */
+  --ink-muted: #466079; /* secondary text, 6:1 on paper */
+  --rule: #c6d3e3; /* hairlines and borders */
+  --field-rule: #6b7f96; /* form field borders: 3.8:1 on paper, so fields are easy to find */
+  --blue: #1e4ed0; /* the single accent: ultramarine */
+  --on-blue: #f6f9fe; /* text on the accent */
+  --sheet: #ffffff; /* raised surfaces like the guestbook card */
+  --danger: #b42318; /* errors only */
+
+  /* Blueprint print palette, used while X-ray mode is on. */
+  --print: #17398e;
+  --print-ink: #eef3ff;
+  --print-muted: #b9c9f2;
+  --print-rule: rgba(226, 235, 255, 0.26);
+  --print-danger: #ffb4a8;
+
+  /* Semantic tokens: what components actually use. X-ray mode swaps their values below. */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --muted: var(--ink-muted);
+  --line: var(--rule);
+  --field-border: var(--field-rule);
+  --accent: var(--blue);
+  --on-accent: var(--on-blue);
+  --surface: var(--sheet);
+  --error: var(--danger);
+
+  /* Fonts. next/font (see layout.tsx) defines --font-archivo and --font-plex-mono on <html>. */
+  --font-body-stack: var(--font-archivo), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono-stack: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Shape and spacing. One radius for the whole site keeps the drawing look consistent. */
+  --radius: 2px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --max-width: 1200px;
+  --header-height: 64px;
+
+  /* Easing for entrances: fast start, gentle stop. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark theme follows the visitor's system setting. Only the raw palette changes. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #0c1526;
+    --ink: #e2eaf6;
+    --ink-muted: #93a5bf;
+    --rule: #22324b;
+    --field-rule: #6f86a6; /* 4.9:1 on the dark paper */
+    --blue: #7fa3ff;
+    --on-blue: #0c1526;
+    --sheet: #111c30;
+    --danger: #ff8a7a;
+    --print: #0f2a6e;
+    --print-ink: #eaf0ff;
+    --print-muted: #a9bceb;
+    --print-rule: rgba(226, 235, 255, 0.2);
+    --print-danger: #ffb4a8;
+  }
+}
+
+/* X-ray mode: the whole page becomes a blueprint print. XrayContext sets data-xray on <html>. */
+html[data-xray='on'] {
+  --bg: var(--print);
+  --fg: var(--print-ink);
+  --muted: var(--print-muted);
+  --line: var(--print-rule);
+  --field-border: var(--print-muted);
+  --accent: var(--print-ink);
+  --on-accent: var(--print);
+  --surface: transparent;
+  --error: var(--print-danger);
+}
+
+/* ---------- Reset and base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Anchor links (#work, #guestbook) stop below the sticky header instead of under it. */
+  scroll-padding-top: calc(var(--header-height) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body-stack);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+/* The blueprint grid behind everything while X-ray is on. */
+html[data-xray='on'] body {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* One visible focus style for keyboard users everywhere. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Shared building blocks ---------- */
+
+/* Centred page column with the side gutter. */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--max-width));
+  margin-inline: auto;
+}
+
+/* "Skip to content" link: hidden until a keyboard user tabs to it. */
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Hidden from sight but still in the page (used for the honeypot field). */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* A 1px press gives the button a physical feel. */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Busy buttons use aria-disabled (they keep keyboard focus); both forms look the same. */
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.72;
+  cursor: progress;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--line);
+}
+
+.btn-ghost:hover {
+  border-color: var(--fg);
+}
+
+/* Form fields: label above input, help or error text below. */
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius);
+  resize: vertical;
+}
+
+.input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+/* ---------- X-ray part labels ----------
+   Any element with data-xray-label="..." gets a dashed outline and a small label while X-ray is on.
+   position: relative is set all the time (not only in X-ray) so switching modes never shifts the layout. */
+[data-xray-label] {
+  position: relative;
+}
+
+html[data-xray='on'] [data-xray-label] {
+  outline: 1px dashed var(--fg);
+  outline-offset: 6px;
+}
+
+html[data-xray='on'] [data-xray-label]::after {
+  content: attr(data-xray-label);
+  /* Same text, with an empty "alternative text" after the slash: screen readers skip the label, so a
+     button's accessible name stays "X-ray" instead of gaining the label. Browsers that don't support
+     the slash syntax ignore this line and keep the one above. */
+  content: attr(data-xray-label) / '';
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  transform: translateY(-50%);
+  z-index: 2;
+  max-width: calc(100% - 20px);
+  padding: 0 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono-stack);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--fg);
+  pointer-events: none;
+}
+
+/* ---------- Robot guide highlight ----------
+   While the chat robot points at a button (see lib/guide.ts), the button pulses with an orange ring,
+   the same orange as the robot, so the eye connects the two. */
+[data-guide-highlight='true'] {
+  animation: guide-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes guide-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 44, 0.75);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 44, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-guide-highlight='true'] {
+    outline: 3px solid #ff6b2c;
+    outline-offset: 3px;
+  }
+}
+
+/* ---------- Reduced motion ----------
+   Visitors who ask their system for less motion get every end state instantly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

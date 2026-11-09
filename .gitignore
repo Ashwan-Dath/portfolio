@@ -1,0 +1,34 @@
+# .gitignore
+# Files git should never track. Anything listed here stays on your machine only.
+
+# Installed packages (recreated by `npm install` / `npm ci`)
+node_modules/
+
+# Next.js build output and generated type file
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+
+# Backend build output
+backend/dist/
+
+# Test coverage reports
+coverage/
+
+# Environment files hold secrets. Only the committed .env.example templates are allowed.
+.env
+.env.*
+!.env.example
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Logs and operating-system clutter
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Local tool state that is not part of the project
+.superpowers/
+.impeccable/
+.vercel/

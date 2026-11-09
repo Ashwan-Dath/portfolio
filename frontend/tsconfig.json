@@ -1,0 +1,50 @@
+// tsconfig.json
+// TypeScript settings for the Next.js app. TypeScript reads this file with comments allowed (JSONC).
+// Next.js may add entries to "include" on its first run; that is expected.
+{
+  "compilerOptions": {
+    // JavaScript version the type checker assumes. Next.js compiles with its own tool (SWC),
+    // so TypeScript only type-checks and never produces the code that ships.
+    "target": "ES2022",
+    // Built-in type definitions available: browser APIs (dom), iterating NodeLists (dom.iterable), modern JS.
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // Every source file is TypeScript; plain .js files are not allowed in.
+    "allowJs": false,
+    // Skip type-checking inside node_modules: faster, and library types are not ours to fix.
+    "skipLibCheck": true,
+
+    // Strictness: catch nulls, implicit any and unchecked array access (arr[0] may be undefined).
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    // Only TypeScript syntax that can be erased (no enums, namespaces or constructor parameter properties).
+    // This keeps the code runnable by tools that simply strip types, like Node's built-in TypeScript support.
+    "erasableSyntaxOnly": true,
+
+    // Next.js does the bundling, so TypeScript never writes output files.
+    "noEmit": true,
+    // Lets `import x from 'some-commonjs-package'` work the way bundlers handle it.
+    "esModuleInterop": true,
+    // Modern import/export syntax, resolved the way bundlers (like Next.js's) find files.
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    // Allows importing .json files with types.
+    "resolveJsonModule": true,
+    // Every file must make sense on its own, because Next.js compiles files one at a time.
+    "isolatedModules": true,
+    // React 17+ JSX transform: no need to `import React` in every component.
+    "jsx": "react-jsx",
+    // Remembers previous checks between runs, so repeated type checks are faster.
+    "incremental": true,
+    // Next.js's editor plugin: extra checks and hints for App Router files in VS Code.
+    "plugins": [{ "name": "next" }],
+
+    // `@/lib/env` means `src/lib/env`, so imports never need long ../../ chains.
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  // Files to check: all TypeScript, plus the type files Next.js generates (next-env.d.ts, .next/types).
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],
+  // Installed packages are never checked (see skipLibCheck above).
+  "exclude": ["node_modules"]
+}
